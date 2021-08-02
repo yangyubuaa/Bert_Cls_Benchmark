@@ -57,8 +57,13 @@ def construct_dataset(tokenizer, SOURCE_PATH):
     with open(SOURCE_PATH, "r", encoding="utf-8") as train_set:
         data = train_set.readlines()
         for line in tqdm(data):
-            line = line.strip()
-            sequence, label = line[:-2], line[-1]
+            line = line.strip().split("\t")
+            sequence = line[1]
+            if line[2] == "是":
+                label = 1
+            else:
+                label = 0
+            
             # print(sequence, label)
             # break
             sequence_tokenized = tokenizer(sequence, return_tensors="pt", max_length=20, padding="max_length",

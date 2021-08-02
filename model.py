@@ -6,7 +6,7 @@ class BertModelForClassification(torch.nn.Module):
     def __init__(self):
         super(BertModelForClassification, self).__init__()
         self.bert_feature_layer = BertModel.from_pretrained("huggingface_pretrained_model/bert-base-chinese")
-        self.classification_layer = torch.nn.Linear(768, 3)
+        self.classification_layer = torch.nn.Linear(768, 2)
 
     def forward(self, input_ids, attention_mask, token_type_ids):
         deep_features = self.bert_feature_layer(input_ids, attention_mask, token_type_ids)

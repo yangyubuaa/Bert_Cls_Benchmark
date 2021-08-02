@@ -1,7 +1,7 @@
-CURRENT_DIR: "/Users/yangyu/Desktop/sogou/新词发现/bert_benchmark/"
-TRAIN_DIR: "data/train/train.txt"
-EVAL_DIR: "data/eval/eval.txt"
-TEST_DIR: "data/test/test.txt"
+CURRENT_DIR: "/home/yangyu/huazhuangpin/Bert_Cls_Benchmark/"
+TRAIN_DIR: "data/train.txt"
+EVAL_DIR: "data/eval.txt"
+TEST_DIR: "data/test.txt"
 
 bert_model_path: "huggingface_pretrained_model/bert-base-chinese"
 
