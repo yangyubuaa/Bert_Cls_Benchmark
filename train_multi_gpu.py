@@ -90,15 +90,14 @@ def evaluate(config, model, eval_dataloader, device_ids):
         if index % 10 == 0:
             print("eval{}/{}".format(str(index), str(len(eval_dataloader))))
         input_ids, attention_mask, token_type_ids = \
-                batch[0]["input_ids"].squeeze(), batch[0]["attention_mask"].squeeze(), batch[0]["token_type_ids"].squeeze()
-        label = batch[1]
+                batch[0].squeeze(), batch[1].squeeze(), batch[2].squeeze()
+        label = batch[3]
         if config["use_cuda"] and torch.cuda.is_available():
             input_ids, attention_mask, token_type_ids = \
             input_ids.cuda(device=device_ids[0]), attention_mask.cuda(device=device_ids[0]), token_type_ids.cuda(device=device_ids[0])
             label = label.cuda(device=device_ids[0])
         model_output = model(input_ids, attention_mask, token_type_ids)
-        lmcl = LargeMarginCosineLoss()
-        eval_loss = lmcl(model_output, label)
+        eval_loss = cross_entropy(model_output, label)
         loss_sum = loss_sum + eval_loss.item()
 
         pred = torch.argmax(model_output, dim=1)
